@@ -1,11 +1,11 @@
 import { Check, Users } from 'lucide-react';
-import { getRelatedAccommodations } from '../../constants/accommodations';
 import type { Accommodation } from '../../types/accommodation';
 import { DetailGallery } from '../shared/DetailGallery';
 import { RelatedAccommodations } from './RelatedAccommodations';
 
 interface AccommodationDetailProps {
   accommodation: Accommodation;
+  related: Accommodation[];
   onBack: () => void;
   onSelect: (id: string) => void;
 }
@@ -14,8 +14,12 @@ function formatPrice(amount: number): string {
   return `KES ${amount.toLocaleString('en-KE')}`;
 }
 
-export function AccommodationDetail({ accommodation, onBack, onSelect }: AccommodationDetailProps) {
-  const related = getRelatedAccommodations(accommodation.id);
+export function AccommodationDetail({
+  accommodation,
+  related,
+  onBack,
+  onSelect,
+}: AccommodationDetailProps) {
 
   return (
     <article className="acc-detail">

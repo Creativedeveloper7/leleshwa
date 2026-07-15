@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getCuratedEventById } from '../../constants/curatedEvents';
+import { useSiteContent } from '../../hooks/useSiteContent';
 import { OPEN_EVENT_EVENT } from '../../utils/eventEvents';
 import { EventDetail } from './EventDetail';
 import { EventGrid } from './EventGrid';
 
 export function EventSection() {
+  const { events } = useSiteContent();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const selected = selectedId ? getCuratedEventById(selectedId) : null;
+  const selected = selectedId
+    ? events.find((item) => item.id === selectedId) ?? null
+    : null;
 
   const handleSelect = useCallback((id: string) => {
     setSelectedId(id);
@@ -23,21 +26,26 @@ export function EventSection() {
   useEffect(() => {
     const onOpen = (event: Event) => {
       const id = (event as CustomEvent<{ id: string }>).detail?.id;
-      if (id && getCuratedEventById(id)) {
+      if (id && events.some((item) => item.id === id)) {
         handleSelect(id);
       }
     };
 
     window.addEventListener(OPEN_EVENT_EVENT, onOpen);
     return () => window.removeEventListener(OPEN_EVENT_EVENT, onOpen);
-  }, [handleSelect]);
+  }, [events, handleSelect]);
 
   return (
     <div className="event-root">
       {selected ? (
-        <EventDetail event={selected} onBack={handleBack} onSelect={handleSelect} />
+        <EventDetail
+          event={selected}
+          related={events.filter((item) => item.id !== selected.id)}
+          onBack={handleBack}
+          onSelect={handleSelect}
+        />
       ) : (
-        <EventGrid onSelect={handleSelect} />
+        <EventGrid items={events} onSelect={handleSelect} />
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { filterGalleryPhotos, GALLERY_FILTERS } from '../../constants/galleryPhotos';
+import { GALLERY_FILTERS } from '../../constants/galleryPhotos';
+import { useSiteContent } from '../../hooks/useSiteContent';
 import type { GalleryFilterId } from '../../types/galleryPhoto';
 import { GalleryFilterBar } from './GalleryFilterBar';
 import { GalleryGrid } from './GalleryGrid';
@@ -8,16 +9,17 @@ import { GalleryLightbox } from './GalleryLightbox';
 const FILTER_FADE_MS = 220;
 
 export function GallerySection() {
+  const { gallery } = useSiteContent();
   const [activeFilter, setActiveFilter] = useState<GalleryFilterId>('all');
   const [fading, setFading] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const fadeTimerRef = useRef<number | null>(null);
 
-  const filteredPhotos = useMemo(
-    () => filterGalleryPhotos(activeFilter),
-    [activeFilter],
-  );
+  const filteredPhotos = useMemo(() => {
+    if (activeFilter === 'all') return gallery;
+    return gallery.filter((photo) => photo.category === activeFilter);
+  }, [activeFilter, gallery]);
 
   const handleFilterChange = useCallback((next: GalleryFilterId) => {
     if (next === activeFilter) return;

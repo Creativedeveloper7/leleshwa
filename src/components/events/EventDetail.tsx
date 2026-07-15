@@ -1,11 +1,11 @@
 import { Check, Clock, Users } from 'lucide-react';
-import { getRelatedEvents } from '../../constants/curatedEvents';
 import type { CuratedEvent } from '../../types/curatedEvent';
 import { DetailGallery } from '../shared/DetailGallery';
 import { RelatedEvents } from './RelatedEvents';
 
 interface EventDetailProps {
   event: CuratedEvent;
+  related: CuratedEvent[];
   onBack: () => void;
   onSelect: (id: string) => void;
 }
@@ -14,8 +14,7 @@ function formatPrice(amount: number): string {
   return `KES ${amount.toLocaleString('en-KE')}`;
 }
 
-export function EventDetail({ event, onBack, onSelect }: EventDetailProps) {
-  const related = getRelatedEvents(event.id);
+export function EventDetail({ event, related, onBack, onSelect }: EventDetailProps) {
 
   return (
     <article className="acc-detail events-detail">

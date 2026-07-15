@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { OUTDOOR_DINING_LOCATIONS } from '../../constants/diningVenues';
 import type {
   OutdoorDiningFormData,
   OutdoorDiningFormErrors,
@@ -8,6 +7,7 @@ import type {
 import { FloatingInput, FloatingSelect, FloatingTextarea } from '../reservation/FormField';
 
 interface OutdoorDiningFormProps {
+  locations: string[];
   onBack: () => void;
 }
 
@@ -39,7 +39,7 @@ function validate(data: OutdoorDiningFormData): OutdoorDiningFormErrors {
   return errors;
 }
 
-export function OutdoorDiningForm({ onBack }: OutdoorDiningFormProps) {
+export function OutdoorDiningForm({ locations, onBack }: OutdoorDiningFormProps) {
   const [form, setForm] = useState<OutdoorDiningFormData>(INITIAL_FORM);
   const [errors, setErrors] = useState<OutdoorDiningFormErrors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -148,7 +148,7 @@ export function OutdoorDiningForm({ onBack }: OutdoorDiningFormProps) {
             label="Location preference"
             value={form.locationPreference}
             onChange={(event) => setField('locationPreference', event.target.value)}
-            options={OUTDOOR_DINING_LOCATIONS}
+            options={locations}
             placeholder="Select location"
           />
           <FloatingInput

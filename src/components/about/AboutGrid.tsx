@@ -1,14 +1,15 @@
-import { ABOUT_STORIES } from '../../constants/aboutStories';
+import type { AboutStory } from '../../types/aboutStory';
 import { AboutCard } from './AboutCard';
 
 interface AboutGridProps {
+  items: AboutStory[];
   onSelect: (id: string) => void;
 }
 
-export function AboutGrid({ onSelect }: AboutGridProps) {
+export function AboutGrid({ items, onSelect }: AboutGridProps) {
   return (
     <div className="about-grid" role="list">
-      {ABOUT_STORIES.map((story) => (
+      {items.map((story) => (
         <div key={story.id} role="listitem">
           <AboutCard story={story} onSelect={onSelect} />
         </div>

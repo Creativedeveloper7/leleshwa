@@ -1,17 +1,16 @@
 import { Check } from 'lucide-react';
-import { getRelatedAboutStories } from '../../constants/aboutStories';
 import type { AboutStory } from '../../types/aboutStory';
 import { DetailGallery } from '../shared/DetailGallery';
 import { RelatedAboutStories } from './RelatedAboutStories';
 
 interface AboutDetailProps {
   story: AboutStory;
+  related: AboutStory[];
   onBack: () => void;
   onSelect: (id: string) => void;
 }
 
-export function AboutDetail({ story, onBack, onSelect }: AboutDetailProps) {
-  const related = getRelatedAboutStories(story.id);
+export function AboutDetail({ story, related, onBack, onSelect }: AboutDetailProps) {
 
   return (
     <article className="acc-detail">

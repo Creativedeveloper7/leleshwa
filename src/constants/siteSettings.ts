@@ -24,4 +24,4 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const NEWSLETTER_SUBSCRIBE_URL =
-  import.meta.env.VITE_NEWSLETTER_API_URL ?? '/api/newsletter/subscribe';
+  import.meta.env?.VITE_NEWSLETTER_API_URL ?? '/api/newsletter/subscribe';

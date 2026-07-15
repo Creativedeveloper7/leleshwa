@@ -1,11 +1,12 @@
 import { FormEvent, useState } from 'react';
-import { SOCIAL_LINKS } from '../../constants/siteSettings';
+import { useSiteContent } from '../../hooks/useSiteContent';
 import type { NewsletterSubmitState } from '../../types/newsletter';
 import { subscribeToNewsletter } from '../../utils/newsletterApi';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function FooterStayInTouch() {
+  const { socialLinks } = useSiteContent();
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<NewsletterSubmitState>('idle');
   const [feedback, setFeedback] = useState('');
@@ -75,8 +76,8 @@ export function FooterStayInTouch() {
         </p>
       )}
 
-      <nav className="footer-social" aria-label="Social media">
-        {SOCIAL_LINKS.map((link, index) => (
+      <div className="footer-social" aria-label="Social media">
+        {socialLinks.map((link, index) => (
           <span key={link.id} className="footer-social__item">
             {index > 0 && (
               <span className="footer-social__dot" aria-hidden="true">
@@ -88,7 +89,7 @@ export function FooterStayInTouch() {
             </a>
           </span>
         ))}
-      </nav>
+      </div>
     </>
   );
 }

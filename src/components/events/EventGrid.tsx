@@ -1,14 +1,15 @@
-import { CURATED_EVENTS } from '../../constants/curatedEvents';
+import type { CuratedEvent } from '../../types/curatedEvent';
 import { EventCard } from './EventCard';
 
 interface EventGridProps {
+  items: CuratedEvent[];
   onSelect: (id: string) => void;
 }
 
-export function EventGrid({ onSelect }: EventGridProps) {
+export function EventGrid({ items, onSelect }: EventGridProps) {
   return (
     <div className="experience-grid event-grid" role="list">
-      {CURATED_EVENTS.map((event) => (
+      {items.map((event) => (
         <div key={event.id} role="listitem">
           <EventCard event={event} onSelect={onSelect} />
         </div>

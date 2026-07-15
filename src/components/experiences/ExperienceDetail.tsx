@@ -1,11 +1,11 @@
 import { Check, Clock, Users } from 'lucide-react';
-import { getRelatedExperiences } from '../../constants/curatedExperiences';
 import type { CuratedExperience } from '../../types/curatedExperience';
 import { DetailGallery } from '../shared/DetailGallery';
 import { RelatedExperiences } from './RelatedExperiences';
 
 interface ExperienceDetailProps {
   experience: CuratedExperience;
+  related: CuratedExperience[];
   onBack: () => void;
   onSelect: (id: string) => void;
 }
@@ -14,8 +14,7 @@ function formatPrice(amount: number): string {
   return `KES ${amount.toLocaleString('en-KE')}`;
 }
 
-export function ExperienceDetail({ experience, onBack, onSelect }: ExperienceDetailProps) {
-  const related = getRelatedExperiences(experience.id);
+export function ExperienceDetail({ experience, related, onBack, onSelect }: ExperienceDetailProps) {
 
   return (
     <article className="acc-detail">

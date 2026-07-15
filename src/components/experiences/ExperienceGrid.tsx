@@ -1,14 +1,15 @@
-import { CURATED_EXPERIENCES } from '../../constants/curatedExperiences';
+import type { CuratedExperience } from '../../types/curatedExperience';
 import { ExperienceCard } from './ExperienceCard';
 
 interface ExperienceGridProps {
+  items: CuratedExperience[];
   onSelect: (id: string) => void;
 }
 
-export function ExperienceGrid({ onSelect }: ExperienceGridProps) {
+export function ExperienceGrid({ items, onSelect }: ExperienceGridProps) {
   return (
     <div className="experience-grid" role="list">
-      {CURATED_EXPERIENCES.map((experience) => (
+      {items.map((experience) => (
         <div key={experience.id} role="listitem">
           <ExperienceCard experience={experience} onSelect={onSelect} />
         </div>
