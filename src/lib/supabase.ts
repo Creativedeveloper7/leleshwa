@@ -52,7 +52,9 @@ interface AuthResponse {
 
 function configuration(): { url: string; anonKey: string } {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    throw new Error('Supabase is not configured. Add the Vite Supabase environment variables.');
+    throw new Error(
+      'Supabase is not configured on this deploy. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel, then Redeploy.',
+    );
   }
   return { url: SUPABASE_URL, anonKey: SUPABASE_ANON_KEY };
 }

@@ -1,25 +1,33 @@
 function resolveAllowedOrigin(request?: Request): string {
   const requestOrigin = request?.headers.get('Origin');
-  const configured = Deno.env.get('ALLOWED_ORIGIN');
+  const configured = (Deno.env.get('ALLOWED_ORIGIN') ?? '*').trim();
 
   if (!configured || configured === '*') {
     return requestOrigin || '*';
   }
 
-  if (requestOrigin && configured === requestOrigin) {
-    return requestOrigin;
+  const allowed = configured.split(',').map((value) => value.trim()).filter(Boolean);
+
+  if (requestOrigin) {
+    if (allowed.includes('*') || allowed.includes(requestOrigin)) {
+      return requestOrigin;
+    }
+
+    // Always allow local Vite during development.
+    if (/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(requestOrigin)) {
+      return requestOrigin;
+    }
+
+    // Allow any *.vercel.app preview/production host when a vercel.app origin is configured.
+    if (
+      /\.vercel\.app$/.test(requestOrigin) &&
+      allowed.some((origin) => origin.includes('vercel.app'))
+    ) {
+      return requestOrigin;
+    }
   }
 
-  // Allow local Vite origins during development even when production origin is configured.
-  if (
-    requestOrigin &&
-    (/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(requestOrigin) ||
-      requestOrigin === configured)
-  ) {
-    return requestOrigin;
-  }
-
-  return configured;
+  return allowed[0] || '*';
 }
 
 export function corsHeaders(request?: Request): Record<string, string> {
