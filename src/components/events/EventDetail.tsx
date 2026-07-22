@@ -62,9 +62,9 @@ export function EventDetail({ event, related, onBack, onSelect }: EventDetailPro
           </ul>
         </div>
 
-        <button type="button" className="btn-reserve acc-detail-cta" data-reserve-trigger>
+        <a href="/reserve/?experience=events" className="btn-reserve acc-detail-cta">
           Enquire About This Event
-        </button>
+        </a>
       </div>
 
       <RelatedEvents items={related} onSelect={onSelect} />

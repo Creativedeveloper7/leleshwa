@@ -33,7 +33,7 @@ export type FormFieldKey = keyof ReservationFormData;
 
 export type FormErrors = Partial<Record<FormFieldKey, string>>;
 
-export type SubmitState = 'idle' | 'loading' | 'success';
+export type SubmitState = 'idle' | 'loading' | 'success' | 'error';
 
 export const INITIAL_FORM_DATA: ReservationFormData = {
   fullName: '',

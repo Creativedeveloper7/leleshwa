@@ -1,6 +1,5 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
 import { AboutSection } from './components/about/AboutSection';
 import { AccommodationSection } from './components/accommodation/AccommodationSection';
 import { DiningSection } from './components/dining/DiningSection';
@@ -9,15 +8,6 @@ import { ExperienceSection } from './components/experiences/ExperienceSection';
 import { FooterStayInTouch } from './components/footer/FooterStayInTouch';
 import { GallerySection } from './components/gallery/GallerySection';
 import './index.css';
-
-const reservationRoot = document.getElementById('reservation-root');
-if (reservationRoot) {
-  createRoot(reservationRoot).render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  );
-}
 
 const accommodationRoot = document.getElementById('accommodation-root');
 if (accommodationRoot) {

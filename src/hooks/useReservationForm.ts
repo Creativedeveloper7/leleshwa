@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import type {
   ExperienceType,
   FormErrors,
@@ -7,14 +7,16 @@ import type {
   SubmitState,
 } from '../types/reservation';
 import { INITIAL_FORM_DATA } from '../types/reservation';
+import { createReservation } from '../lib/supabase';
 import { validateField, validateForm } from '../utils/validation';
 
-export function useReservationForm() {
-  const [experience, setExperience] = useState<ExperienceType | null>(null);
+export function useReservationForm(initialExperience: ExperienceType | null = null) {
+  const [experience, setExperience] = useState<ExperienceType | null>(initialExperience);
   const [formData, setFormData] = useState<ReservationFormData>(INITIAL_FORM_DATA);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<FormFieldKey, boolean>>>({});
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [submitError, setSubmitError] = useState('');
 
   const updateField = useCallback(
     (field: FormFieldKey, value: string) => {
@@ -53,6 +55,7 @@ export function useReservationForm() {
     setErrors({});
     setTouched({});
     setSubmitState('idle');
+    setSubmitError('');
   }, []);
 
   const submit = useCallback(async () => {
@@ -66,10 +69,23 @@ export function useReservationForm() {
 
     if (Object.keys(validationErrors).length > 0) return false;
 
+    if (!experience) return false;
+
     setSubmitState('loading');
-    await new Promise((resolve) => setTimeout(resolve, 1800));
-    setSubmitState('success');
-    return true;
+    setSubmitError('');
+    try {
+      await createReservation(experience, formData);
+      setSubmitState('success');
+      return true;
+    } catch (error) {
+      setSubmitState('error');
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : 'Unable to submit your reservation. Please try again.',
+      );
+      return false;
+    }
   }, [experience, formData]);
 
   const setTouchedAll = useCallback(() => {
@@ -88,6 +104,7 @@ export function useReservationForm() {
     formData,
     errors,
     submitState,
+    submitError,
     selectExperience,
     updateField,
     blurField,

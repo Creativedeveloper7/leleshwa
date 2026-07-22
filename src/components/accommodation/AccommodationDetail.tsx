@@ -63,9 +63,9 @@ export function AccommodationDetail({
           </ul>
         </div>
 
-        <button type="button" className="btn-reserve acc-detail-cta" data-reserve-trigger>
+        <a href="/reserve/?experience=accommodation" className="btn-reserve acc-detail-cta">
           Reserve This Stay
-        </button>
+        </a>
       </div>
 
       <RelatedAccommodations items={related} onSelect={onSelect} />

@@ -1,0 +1,164 @@
+.reserve-page {
+  min-height: 100vh;
+  color: var(--color-lodge-900);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  background:
+    linear-gradient(160deg, rgba(45, 27, 20, 0.88), rgba(61, 40, 28, 0.72)),
+    url('/images/sunset.png') center / cover fixed;
+}
+
+.reserve-page__atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at top, rgba(197, 157, 95, 0.18), transparent 55%),
+    linear-gradient(180deg, transparent 40%, rgba(20, 14, 10, 0.35));
+}
+
+.reserve-page__shell {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.25rem 0 3.5rem;
+}
+
+.reserve-page__nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.reserve-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-self: start;
+  min-height: 2.5rem;
+  padding: 0 0.85rem;
+  border: 1px solid rgba(245, 240, 230, 0.28);
+  border-radius: 999px;
+  background: rgba(245, 240, 230, 0.12);
+  color: var(--color-lodge-cream);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  transition: background 0.25s var(--ease-concierge), border-color 0.25s var(--ease-concierge);
+}
+
+.reserve-page__back:hover:not(:disabled) {
+  background: rgba(245, 240, 230, 0.22);
+  border-color: rgba(245, 240, 230, 0.45);
+}
+
+.reserve-page__back:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.reserve-page__brand {
+  display: block;
+  line-height: 0;
+}
+
+.reserve-page__brand img {
+  height: 3.25rem;
+  width: auto;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
+}
+
+.reserve-page__crumb {
+  justify-self: end;
+  color: rgba(245, 240, 230, 0.72);
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.reserve-page__main {
+  min-height: calc(100vh - 7rem);
+}
+
+.reserve-page__panel {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 7rem);
+  overflow: hidden;
+  background: var(--color-lodge-cream);
+  border: 1px solid rgba(45, 27, 20, 0.12);
+  border-radius: 1.25rem;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+}
+
+.reserve-page__panel--success {
+  min-height: 70vh;
+}
+
+.reserve-page__body {
+  flex: 1;
+  min-height: 0;
+}
+
+.reserve-page .reserve-header {
+  padding-top: 1.75rem;
+}
+
+.reserve-page .reserve-body {
+  padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.reserve-page .reserve-body__summary {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+}
+
+.reserve-page .concierge-footer {
+  padding: 1.25rem clamp(1.25rem, 3vw, 2.5rem) 1.5rem;
+  border-top: 1px solid rgba(45, 27, 20, 0.1);
+  background: rgba(232, 225, 213, 0.55);
+}
+
+@media (max-width: 900px) {
+  .reserve-page__shell {
+    width: min(100% - 1rem, 1180px);
+    padding-top: 0.85rem;
+  }
+
+  .reserve-page__nav {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .reserve-page__brand img {
+    height: 2.75rem;
+  }
+
+  .reserve-page__panel {
+    min-height: calc(100vh - 5.5rem);
+    border-radius: 1rem;
+  }
+
+  .reserve-page .reserve-body__summary {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .reserve-page__crumb {
+    display: none;
+  }
+
+  .reserve-page__nav {
+    grid-template-columns: auto 1fr;
+  }
+}

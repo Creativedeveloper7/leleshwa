@@ -5,7 +5,9 @@ import type { SubmitState } from '../../types/reservation';
 interface ModalFooterProps {
   step: JourneyStep;
   submitState: SubmitState;
+  submitError: string;
   canContinue: boolean;
+  cancelLabel?: string;
   onCancel: () => void;
   onBack: () => void;
   onContinue: () => void;
@@ -15,7 +17,9 @@ interface ModalFooterProps {
 export function ModalFooter({
   step,
   submitState,
+  submitError,
   canContinue,
+  cancelLabel = 'Cancel',
   onCancel,
   onBack,
   onContinue,
@@ -25,6 +29,11 @@ export function ModalFooter({
 
   return (
     <footer className="concierge-footer">
+      {submitError && (
+        <p className="mb-3 text-sm text-red-700" role="alert">
+          {submitError}
+        </p>
+      )}
       <div className="reserve-cta-row">
         {step === 'experience' ? (
           <button
@@ -33,7 +42,7 @@ export function ModalFooter({
             disabled={isLoading}
             className="concierge-btn-ghost"
           >
-            Cancel
+            {cancelLabel}
           </button>
         ) : (
           <button

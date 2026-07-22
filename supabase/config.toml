@@ -1,0 +1,10 @@
+project_id = "leleshwa"
+
+[functions.create-reservation]
+verify_jwt = false
+
+[functions.subscribe-newsletter]
+verify_jwt = false
+
+[functions.send-booking-response]
+verify_jwt = false

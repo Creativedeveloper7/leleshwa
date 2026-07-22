@@ -62,9 +62,9 @@ export function ExperienceDetail({ experience, related, onBack, onSelect }: Expe
           </ul>
         </div>
 
-        <button type="button" className="btn-reserve acc-detail-cta" data-reserve-trigger>
+        <a href="/reserve/?experience=activities" className="btn-reserve acc-detail-cta">
           Book This Experience
-        </button>
+        </a>
       </div>
 
       <RelatedExperiences items={related} onSelect={onSelect} />

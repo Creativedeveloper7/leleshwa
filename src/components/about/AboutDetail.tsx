@@ -48,9 +48,9 @@ export function AboutDetail({ story, related, onBack, onSelect }: AboutDetailPro
           &ldquo;Where every sunset tells a story, and every stay becomes a memory.&rdquo;
         </blockquote>
 
-        <button type="button" className="btn-reserve acc-detail-cta" data-reserve-trigger>
+        <a href="/reserve/" className="btn-reserve acc-detail-cta">
           Plan Your Visit
-        </button>
+        </a>
       </div>
 
       <RelatedAboutStories items={related} onSelect={onSelect} />

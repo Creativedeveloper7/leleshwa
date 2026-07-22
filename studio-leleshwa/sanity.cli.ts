@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 'th48chxn',
     dataset: 'production',
   },
+  studioHost: 'leleshwa',
 });

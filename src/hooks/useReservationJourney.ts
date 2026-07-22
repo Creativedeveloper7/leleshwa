@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import type { JourneyStep } from '../types/journey';
 
-export function useReservationJourney() {
-  const [step, setStep] = useState<JourneyStep>('experience');
+export function useReservationJourney(initialStep: JourneyStep = 'experience') {
+  const [step, setStep] = useState<JourneyStep>(initialStep);
 
   const goTo = useCallback((next: JourneyStep) => setStep(next), []);
 
