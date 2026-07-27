@@ -15,8 +15,16 @@ export const diningVenue = defineType({
     defineField({ name: 'tagline', title: 'Tagline', type: 'text', rows: 2 }),
     defineField({
       name: 'heroImage',
-      title: 'Hero Image URL',
-      type: 'string',
+      title: 'Hero Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt text',
+          type: 'string',
+        }),
+      ],
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -36,11 +44,24 @@ export const diningVenue = defineType({
       name: 'menuImages',
       title: 'Menu Images',
       type: 'array',
-      of: [defineArrayMember({ type: 'string' })],
+      of: [
+        defineArrayMember({
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt text',
+              type: 'string',
+            }),
+          ],
+        }),
+      ],
+      options: { layout: 'grid' },
       hidden: ({ parent }) => parent?.viewType !== 'menu',
     }),
   ],
   preview: {
-    select: { title: 'name', subtitle: 'viewType' },
+    select: { title: 'name', subtitle: 'viewType', media: 'heroImage' },
   },
 });

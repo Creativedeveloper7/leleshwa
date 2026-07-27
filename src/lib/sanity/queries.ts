@@ -1,10 +1,17 @@
+/** Resolve image URL from Sanity image asset or legacy string path/URL. */
+const imageUrl = (field: string) => `coalesce(${field}.asset->url, ${field})`;
+
+/** Resolve array of image URLs from image assets or legacy string paths. */
+const imageUrlArray = (field: string) =>
+  `${field}[]{ "url": select(defined(asset) => asset->url, true => @) }.url`;
+
 export const SITE_CONTENT_QUERY = `{
   "accommodations": *[_type == "accommodation"] | order(name asc) {
     "id": id.current,
     name,
     tagline,
-    heroImage,
-    gallery,
+    "heroImage": ${imageUrl('heroImage')},
+    "gallery": ${imageUrlArray('gallery')},
     description,
     amenities,
     maxGuests,
@@ -14,8 +21,8 @@ export const SITE_CONTENT_QUERY = `{
     "id": id.current,
     name,
     tagline,
-    heroImage,
-    gallery,
+    "heroImage": ${imageUrl('heroImage')},
+    "gallery": ${imageUrlArray('gallery')},
     description,
     highlights,
     duration,
@@ -26,8 +33,8 @@ export const SITE_CONTENT_QUERY = `{
     "id": id.current,
     name,
     tagline,
-    heroImage,
-    gallery,
+    "heroImage": ${imageUrl('heroImage')},
+    "gallery": ${imageUrlArray('gallery')},
     description,
     highlights,
     duration,
@@ -39,13 +46,13 @@ export const SITE_CONTENT_QUERY = `{
     "id": id.current,
     name,
     tagline,
-    heroImage,
+    "heroImage": ${imageUrl('heroImage')},
     viewType,
-    menuImages
+    "menuImages": ${imageUrlArray('menuImages')}
   },
   "gallery": *[_type == "galleryPhoto"] | order(category asc, alt asc) {
     "id": id.current,
-    src,
+    "src": ${imageUrl('src')},
     alt,
     category
   },
@@ -53,8 +60,8 @@ export const SITE_CONTENT_QUERY = `{
     "id": id.current,
     name,
     tagline,
-    heroImage,
-    gallery,
+    "heroImage": ${imageUrl('heroImage')},
+    "gallery": ${imageUrlArray('gallery')},
     description,
     highlights
   },

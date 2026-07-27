@@ -5,6 +5,11 @@
  *   1. Create a write token at https://www.sanity.io/manage/project/th48chxn/api
  *   2. Add SANITY_API_WRITE_TOKEN to .env
  *   3. npm run seed:sanity
+ *
+ * Note: Image fields are Sanity `image` assets (upload from Studio).
+ * This seed still writes legacy path strings for bootstrap text/content.
+ * After seeding, open Studio and upload/replace hero & gallery images
+ * via the image picker (Upload / Select from device or Media Library).
  */
 
 import { createClient } from '@sanity/client';

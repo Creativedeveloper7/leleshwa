@@ -13,8 +13,9 @@ export const galleryPhoto = defineType({
     }),
     defineField({
       name: 'src',
-      title: 'Image URL',
-      type: 'string',
+      title: 'Image',
+      type: 'image',
+      options: { hotspot: true },
       validation: (rule) => rule.required(),
     }),
     defineField({ name: 'alt', title: 'Alt Text', type: 'string', validation: (rule) => rule.required() }),
@@ -37,6 +38,6 @@ export const galleryPhoto = defineType({
     }),
   ],
   preview: {
-    select: { title: 'alt', subtitle: 'category' },
+    select: { title: 'alt', subtitle: 'category', media: 'src' },
   },
 });

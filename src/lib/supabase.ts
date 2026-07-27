@@ -1,6 +1,17 @@
 import type { ExperienceType, ReservationFormData } from '../types/reservation';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.replace(/\/$/, '');
+function normalizeSupabaseUrl(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+  let url = value.trim().replace(/\/$/, '');
+  // Guard against common Vercel env typos like "ttps://" (missing leading h).
+  if (url.startsWith('ttps://')) url = `h${url}`;
+  if (url.startsWith('http://') && url.includes('.supabase.co')) {
+    url = `https://${url.slice('http://'.length)}`;
+  }
+  return url;
+}
+
+const SUPABASE_URL = normalizeSupabaseUrl(import.meta.env.VITE_SUPABASE_URL);
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const SESSION_KEY = 'leleshwa-admin-session';
 

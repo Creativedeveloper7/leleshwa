@@ -17,7 +17,9 @@ function asNumber(value: unknown, fallback = 0): number {
 }
 
 function asStringArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
+  return Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
+    : [];
 }
 
 function mapAccommodation(doc: Record<string, unknown>): Accommodation | null {
