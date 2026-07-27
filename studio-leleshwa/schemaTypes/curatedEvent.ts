@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { previewWithImage } from './preview';
 
 const imageField = (name: string, title: string) =>
   defineField({
@@ -69,7 +70,5 @@ export const curatedEvent = defineType({
       description: 'e.g. per day, per event',
     }),
   ],
-  preview: {
-    select: { title: 'name', subtitle: 'priceUnit', media: 'heroImage' },
-  },
+  preview: previewWithImage({ title: 'name', subtitle: 'priceUnit', media: 'heroImage' }),
 });

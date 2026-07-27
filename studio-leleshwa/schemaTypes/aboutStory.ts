@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { previewWithImage } from './preview';
 
 export const aboutStory = defineType({
   name: 'aboutStory',
@@ -54,7 +55,5 @@ export const aboutStory = defineType({
       of: [defineArrayMember({ type: 'string' })],
     }),
   ],
-  preview: {
-    select: { title: 'name', subtitle: 'tagline', media: 'heroImage' },
-  },
+  preview: previewWithImage({ title: 'name', subtitle: 'tagline', media: 'heroImage' }),
 });

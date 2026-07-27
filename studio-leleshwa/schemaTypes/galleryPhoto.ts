@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { previewWithImage } from './preview';
 
 export const galleryPhoto = defineType({
   name: 'galleryPhoto',
@@ -37,7 +38,5 @@ export const galleryPhoto = defineType({
       validation: (rule) => rule.required(),
     }),
   ],
-  preview: {
-    select: { title: 'alt', subtitle: 'category', media: 'src' },
-  },
+  preview: previewWithImage({ title: 'alt', subtitle: 'category', media: 'src' }),
 });

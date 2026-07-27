@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { previewWithImage } from './preview';
 
 const imageField = (name: string, title: string, required = true) =>
   defineField({
@@ -64,7 +65,5 @@ export const accommodation = defineType({
     defineField({ name: 'maxGuests', title: 'Max Guests', type: 'number', validation: (rule) => rule.min(1) }),
     defineField({ name: 'priceFrom', title: 'Price From (KES)', type: 'number', validation: (rule) => rule.min(0) }),
   ],
-  preview: {
-    select: { title: 'name', subtitle: 'tagline', media: 'heroImage' },
-  },
+  preview: previewWithImage({ title: 'name', subtitle: 'tagline', media: 'heroImage' }),
 });

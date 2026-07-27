@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { previewWithImage } from './preview';
 
 export const diningVenue = defineType({
   name: 'diningVenue',
@@ -61,7 +62,5 @@ export const diningVenue = defineType({
       hidden: ({ parent }) => parent?.viewType !== 'menu',
     }),
   ],
-  preview: {
-    select: { title: 'name', subtitle: 'viewType', media: 'heroImage' },
-  },
+  preview: previewWithImage({ title: 'name', subtitle: 'viewType', media: 'heroImage' }),
 });
