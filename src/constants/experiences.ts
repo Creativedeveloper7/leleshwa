@@ -15,7 +15,7 @@ export const EXPERIENCES: {
     title: 'Accommodation',
     description: 'Luxury cottages and suites overlooking the wilderness.',
     luxuryLabel: 'Luxury Stays',
-    image: '/images/villa.png',
+    image: '/images/main%20house.png',
     icon: BedDouble,
   },
   {

@@ -88,7 +88,7 @@ export const CURATED_EVENTS: CuratedEvent[] = [
       '/images/wedding.png',
       '/images/sunset.png',
       '/images/restaurant.png',
-      '/images/villa.png',
+      '/images/main%20house.png',
     ],
     description:
       'Exchange vows in a setting of rare beauty — open plains, golden light, and the quiet grandeur of the valley. From ceremony to reception, our team crafts a wedding day as unforgettable as the landscape itself.',
@@ -135,12 +135,12 @@ export const CURATED_EVENTS: CuratedEvent[] = [
     id: 'pavilion-hire',
     name: 'Pavilion Hire',
     tagline: 'An open-air venue above the valley.',
-    heroImage: '/images/villa.png',
+    heroImage: '/images/main%20house.png',
     gallery: [
-      '/images/villa.png',
-      '/images/sunset.png',
       '/images/main%20house.png',
+      '/images/sunset.png',
       '/images/restaurant.png',
+      '/images/rest.png',
     ],
     description:
       'Hire the pavilion for your own production — product launches, exhibitions, film shoots, or private celebrations. A versatile open-air venue with panoramic views and full support from our events team.',

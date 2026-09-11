@@ -5,12 +5,12 @@ export const ACCOMMODATIONS: Accommodation[] = [
     id: 'luxury-suites',
     name: 'Luxury Suites',
     tagline: 'Floor-to-ceiling glass framing the savanna, with a private plunge deck.',
-    heroImage: '/images/villa.png',
+    heroImage: '/images/main%20house.png',
     gallery: [
-      '/images/villa.png',
+      '/images/main%20house.png',
       '/images/villa%202.png',
       '/images/sunset.png',
-      '/images/main%20house.png',
+      '/images/rest.png',
     ],
     description:
       'Wake to panoramic views across the Rift Valley from your private suite. Floor-to-ceiling glass dissolves the boundary between indoors and wilderness, while a secluded plunge deck invites slow mornings and golden-hour sundowners.',
@@ -26,7 +26,7 @@ export const ACCOMMODATIONS: Accommodation[] = [
     gallery: [
       '/images/villa%202.png',
       '/images/rest.png',
-      '/images/villa.png',
+      '/images/sunset.png',
       '/images/bar.png',
     ],
     description:
@@ -34,23 +34,6 @@ export const ACCOMMODATIONS: Accommodation[] = [
     amenities: ['Work desk', 'Garden view', 'Queen bed', 'Ensuite bathroom', 'Tea & coffee station', 'Wi-Fi'],
     maxGuests: 2,
     priceFrom: 19500,
-  },
-  {
-    id: 'family-villas',
-    name: 'Family Villas',
-    tagline: 'Multi-room retreats with shared verandas and room to wander.',
-    heroImage: '/images/main%20house.png',
-    gallery: [
-      '/images/main%20house.png',
-      '/images/villa.png',
-      '/images/wedding.png',
-      '/images/camping.png',
-    ],
-    description:
-      'Spacious multi-bedroom villas built for families and small groups. Shared verandas overlook indigenous gardens, with generous living areas that make gathering effortless after a day of adventure.',
-    amenities: ['Multiple bedrooms', 'Shared veranda', 'Lounge & dining', 'Kitchenette', 'Garden access', 'Daily housekeeping'],
-    maxGuests: 6,
-    priceFrom: 42000,
   },
   {
     id: 'garden-cottages',

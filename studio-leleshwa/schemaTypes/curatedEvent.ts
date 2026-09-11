@@ -47,6 +47,8 @@ export const curatedEvent = defineType({
       name: 'id',
       title: 'ID',
       type: 'slug',
+      description: 'Click Generate after setting the name.',
+      options: { source: 'name', maxLength: 96 },
       validation: (rule) => rule.required(),
     }),
     defineField({ name: 'name', title: 'Name', type: 'string', validation: (rule) => rule.required() }),

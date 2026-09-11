@@ -8,8 +8,10 @@ import type { SocialLink } from '../../constants/siteSettings';
 import type { SiteContent } from './types';
 import { STATIC_SITE_CONTENT } from './fallback';
 
+const FALLBACK_HERO = '/images/sunset.png';
+
 function asString(value: unknown): string {
-  return typeof value === 'string' ? value : '';
+  return typeof value === 'string' ? value.trim() : '';
 }
 
 function asNumber(value: unknown, fallback = 0): number {
@@ -22,17 +24,26 @@ function asStringArray(value: unknown): string[] {
     : [];
 }
 
+function normalizeId(value: unknown): string {
+  const raw = asString(value);
+  if (!raw) return '';
+  // Prefer the slug portion of seeded ids like "accommodation.luxury-suites"
+  if (raw.includes('.')) return raw.slice(raw.lastIndexOf('.') + 1) || raw;
+  // Also strip public-safe hyphenated document ids like "accommodation-luxury-suites"
+  const prefix = /^(accommodation|experience|event|dining|gallery|about)-/;
+  return prefix.test(raw) ? raw.replace(prefix, '') : raw;
+}
+
 function mapAccommodation(doc: Record<string, unknown>): Accommodation | null {
-  const id = asString(doc.id);
+  const id = normalizeId(doc.id);
   const name = asString(doc.name);
-  const heroImage = asString(doc.heroImage);
-  if (!id || !name || !heroImage) return null;
+  if (!id || !name) return null;
 
   return {
     id,
     name,
     tagline: asString(doc.tagline),
-    heroImage,
+    heroImage: asString(doc.heroImage) || FALLBACK_HERO,
     gallery: asStringArray(doc.gallery),
     description: asString(doc.description),
     amenities: asStringArray(doc.amenities),
@@ -42,16 +53,15 @@ function mapAccommodation(doc: Record<string, unknown>): Accommodation | null {
 }
 
 function mapExperience(doc: Record<string, unknown>): CuratedExperience | null {
-  const id = asString(doc.id);
+  const id = normalizeId(doc.id);
   const name = asString(doc.name);
-  const heroImage = asString(doc.heroImage);
-  if (!id || !name || !heroImage) return null;
+  if (!id || !name) return null;
 
   return {
     id,
     name,
     tagline: asString(doc.tagline),
-    heroImage,
+    heroImage: asString(doc.heroImage) || FALLBACK_HERO,
     gallery: asStringArray(doc.gallery),
     description: asString(doc.description),
     highlights: asStringArray(doc.highlights),
@@ -71,18 +81,17 @@ function mapEvent(doc: Record<string, unknown>): CuratedEvent | null {
 }
 
 function mapDining(doc: Record<string, unknown>): DiningVenue | null {
-  const id = asString(doc.id);
+  const id = normalizeId(doc.id);
   const name = asString(doc.name);
-  const heroImage = asString(doc.heroImage);
   const viewType = asString(doc.viewType) as DiningViewType;
-  if (!id || !name || !heroImage) return null;
+  if (!id || !name) return null;
   if (viewType !== 'menu' && viewType !== 'form') return null;
 
   return {
     id,
     name,
     tagline: asString(doc.tagline),
-    heroImage,
+    heroImage: asString(doc.heroImage) || FALLBACK_HERO,
     viewType,
     ...(viewType === 'menu' ? { menuImages: asStringArray(doc.menuImages) } : {}),
   };
@@ -99,7 +108,7 @@ const GALLERY_CATEGORIES = new Set<GalleryCategory>([
 ]);
 
 function mapGallery(doc: Record<string, unknown>): GalleryPhoto | null {
-  const id = asString(doc.id);
+  const id = normalizeId(doc.id);
   const src = asString(doc.src);
   const alt = asString(doc.alt);
   const category = asString(doc.category) as GalleryCategory;
@@ -108,16 +117,15 @@ function mapGallery(doc: Record<string, unknown>): GalleryPhoto | null {
 }
 
 function mapAbout(doc: Record<string, unknown>): AboutStory | null {
-  const id = asString(doc.id);
+  const id = normalizeId(doc.id);
   const name = asString(doc.name);
-  const heroImage = asString(doc.heroImage);
-  if (!id || !name || !heroImage) return null;
+  if (!id || !name) return null;
 
   return {
     id,
     name,
     tagline: asString(doc.tagline),
-    heroImage,
+    heroImage: asString(doc.heroImage) || FALLBACK_HERO,
     gallery: asStringArray(doc.gallery),
     description: asString(doc.description),
     highlights: asStringArray(doc.highlights),
@@ -149,6 +157,7 @@ export function mapSanityPayload(payload: Record<string, unknown>): SiteContent 
     ? payload.accommodations
         .map((doc) => mapAccommodation(doc as Record<string, unknown>))
         .filter((item): item is Accommodation => item !== null)
+        .filter((item) => item.id !== 'family-villas')
     : [];
 
   const experiences = Array.isArray(payload.experiences)
@@ -192,6 +201,17 @@ export function mapSanityPayload(payload: Record<string, unknown>): SiteContent 
     gallery.length > 0 ||
     about.length > 0 ||
     socialLinks.length > 0;
+
+  if (hasCmsContent && typeof console !== 'undefined') {
+    console.info('[content] Loaded Sanity CMS content', {
+      accommodations: accommodations.length,
+      experiences: experiences.length,
+      events: events.length,
+      dining: dining.length,
+      gallery: gallery.length,
+      about: about.length,
+    });
+  }
 
   return {
     accommodations: accommodations.length > 0 ? accommodations : STATIC_SITE_CONTENT.accommodations,

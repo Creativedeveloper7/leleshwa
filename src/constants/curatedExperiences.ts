@@ -19,7 +19,7 @@ export const CURATED_EXPERIENCES: CuratedExperience[] = [
     name: 'Nature Walks',
     tagline: 'Guided trails through indigenous bushland at dawn.',
     heroImage: '/images/naturewalk.png',
-    gallery: ['/images/naturewalk.png', '/images/sunset.png', '/images/villa.png', '/images/camping.png'],
+    gallery: ['/images/naturewalk.png', '/images/sunset.png', '/images/main%20house.png', '/images/camping.png'],
     description:
       'Walk ancient trails with guides who know every bird call and native plant. Dawn walks reveal the valley waking — mist on the grass, light through the acacia, and the quiet rhythm of the wild just beyond Nairobi.',
     highlights: ['Guided naturalist walks', 'Indigenous flora & fauna', 'Dawn & dusk departures', 'Binoculars available', 'Easy to moderate trails', 'Photography stops'],
@@ -58,7 +58,7 @@ export const CURATED_EXPERIENCES: CuratedExperience[] = [
     name: 'Outdoor Games',
     tagline: 'Croquet, bocce, and friendly rivalry on the lawn.',
     heroImage: '/images/chopper.png',
-    gallery: ['/images/chopper.png', '/images/camping.png', '/images/main%20house.png', '/images/villa.png'],
+    gallery: ['/images/chopper.png', '/images/camping.png', '/images/main%20house.png', '/images/rest.png'],
     description:
       'Lawn games on manicured grass with valley views as your backdrop. Croquet, bocce, and classic outdoor pastimes invite laughter and light competition — perfect for families, friends, and corporate groups.',
     highlights: ['Croquet & bocce', 'Lawn games equipment', 'Facilitated sessions', 'Team formats', 'Refreshments on request', 'Shaded seating'],
@@ -97,7 +97,7 @@ export const CURATED_EXPERIENCES: CuratedExperience[] = [
     name: 'Bird Watching',
     tagline: 'Over 200 species call this valley home.',
     heroImage: '/images/sunset.png',
-    gallery: ['/images/sunset.png', '/images/naturewalk.png', '/images/villa.png', '/images/restaurant.png'],
+    gallery: ['/images/sunset.png', '/images/naturewalk.png', '/images/camping.png', '/images/restaurant.png'],
     description:
       'Accompanied by knowledgeable guides, discover the extraordinary birdlife of the Leleshwa valley. Early mornings offer the richest sightings — from raptors on thermals to colourful sunbirds in the garden.',
     highlights: ['Expert birding guides', '200+ species recorded', 'Binoculars provided', 'Species checklist', 'Dawn departures', 'Photography friendly'],

@@ -1,13 +1,33 @@
-/** Resolve image URL from Sanity image asset or legacy string path/URL. */
-const imageUrl = (field: string) => `coalesce(${field}.asset->url, ${field})`;
+/**
+ * Resolve a usable image URL from either:
+ * - a Sanity image asset, or
+ * - a legacy string path/URL left over from seeding
+ * Never return a raw image object (that breaks the website mapper).
+ *
+ * Note: GROQ has no type() helper — detect strings by absence of object keys.
+ */
+const imageUrl = (field: string) =>
+  `select(
+    defined(${field}.asset->url) => ${field}.asset->url,
+    defined(${field}) && !defined(${field}._type) && !defined(${field}.asset) => ${field},
+    true => null
+  )`;
 
-/** Resolve array of image URLs from image assets or legacy string paths. */
 const imageUrlArray = (field: string) =>
-  `${field}[]{ "url": select(defined(asset) => asset->url, true => @) }.url`;
+  `coalesce(
+    ${field}[]{
+      "url": select(
+        defined(asset->url) => asset->url,
+        defined(@) && !defined(_type) && !defined(asset) => @,
+        true => null
+      )
+    }.url[defined(@)],
+    []
+  )`;
 
 export const SITE_CONTENT_QUERY = `{
   "accommodations": *[_type == "accommodation"] | order(name asc) {
-    "id": id.current,
+    "id": coalesce(id.current, _id),
     name,
     tagline,
     "heroImage": ${imageUrl('heroImage')},
@@ -18,7 +38,7 @@ export const SITE_CONTENT_QUERY = `{
     priceFrom
   },
   "experiences": *[_type == "curatedExperience"] | order(name asc) {
-    "id": id.current,
+    "id": coalesce(id.current, _id),
     name,
     tagline,
     "heroImage": ${imageUrl('heroImage')},
@@ -30,7 +50,7 @@ export const SITE_CONTENT_QUERY = `{
     priceFrom
   },
   "events": *[_type == "curatedEvent"] | order(name asc) {
-    "id": id.current,
+    "id": coalesce(id.current, _id),
     name,
     tagline,
     "heroImage": ${imageUrl('heroImage')},
@@ -43,7 +63,7 @@ export const SITE_CONTENT_QUERY = `{
     priceUnit
   },
   "dining": *[_type == "diningVenue"] | order(name asc) {
-    "id": id.current,
+    "id": coalesce(id.current, _id),
     name,
     tagline,
     "heroImage": ${imageUrl('heroImage')},
@@ -51,13 +71,13 @@ export const SITE_CONTENT_QUERY = `{
     "menuImages": ${imageUrlArray('menuImages')}
   },
   "gallery": *[_type == "galleryPhoto"] | order(category asc, alt asc) {
-    "id": id.current,
+    "id": coalesce(id.current, _id),
     "src": ${imageUrl('src')},
     alt,
     category
   },
   "about": *[_type == "aboutStory"] | order(name asc) {
-    "id": id.current,
+    "id": coalesce(id.current, _id),
     name,
     tagline,
     "heroImage": ${imageUrl('heroImage')},

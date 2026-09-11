@@ -10,6 +10,8 @@ export const galleryPhoto = defineType({
       name: 'id',
       title: 'ID',
       type: 'slug',
+      description: 'Click Generate after setting the alt text.',
+      options: { source: 'alt', maxLength: 96 },
       validation: (rule) => rule.required(),
     }),
     defineField({

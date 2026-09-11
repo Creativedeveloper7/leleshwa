@@ -8,7 +8,8 @@ export const sanityClient = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true,
+  // Published Studio edits must appear on the next page load without CDN lag.
+  useCdn: false,
   perspective: 'published',
 });
 

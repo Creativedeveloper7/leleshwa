@@ -13,7 +13,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
   // Outside view
   photo('ov-1', '/images/sunset.png', 'Golden sunset over the Rift Valley escarpment', 'outside-view'),
   photo('ov-2', '/images/naturewalk.png', 'Indigenous bushland trail at dawn', 'outside-view'),
-  photo('ov-3', '/images/villa.png', 'Luxury suite terrace overlooking open plains', 'outside-view'),
+  photo('ov-3', '/images/main%20house.png', 'Main lodge terrace overlooking open plains', 'outside-view'),
   photo('ov-4', '/images/camping.png', 'Safari tents nestled beneath acacia trees', 'outside-view'),
   photo('ov-5', '/images/chopper.png', 'Aerial view of the Leleshwa valley landscape', 'outside-view'),
   photo('ov-6', '/images/main%20house.png', 'Main lodge framed against rolling hills', 'outside-view'),
@@ -30,7 +30,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
   photo('bar-2', '/images/restaurant.png', 'Craft cocktails prepared at sunset', 'bar'),
   photo('bar-3', '/images/sunset.png', 'Sundowner service on the open terrace', 'bar'),
   photo('bar-4', '/images/rest.png', 'Intimate bar seating with soft lantern light', 'bar'),
-  photo('bar-5', '/images/villa.png', 'Chilled wine service on the plunge deck', 'bar'),
+  photo('bar-5', '/images/chopper.png', 'Chilled wine service with valley views', 'bar'),
 
   // Culinary
   photo('cul-1', '/images/rest.png', 'Farm-fresh ingredients prepared fire-side', 'culinary'),
@@ -54,7 +54,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
   photo('exp-5', '/images/sunset.png', 'Bird watching at dawn in the valley', 'experiences'),
 
   // Accommodations
-  photo('acc-1', '/images/villa.png', 'Luxury suite with floor-to-ceiling valley views', 'accommodations'),
+  photo('acc-1', '/images/main%20house.png', 'Luxury suite with floor-to-ceiling valley views', 'accommodations'),
   photo('acc-2', '/images/villa%202.png', 'Executive room with garden outlook', 'accommodations'),
   photo('acc-3', '/images/camping.png', 'Safari tent interior with refined finishes', 'accommodations'),
   photo('acc-4', '/images/main%20house.png', 'Garden cottage surrounded by native bush', 'accommodations'),

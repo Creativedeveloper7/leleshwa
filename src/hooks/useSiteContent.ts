@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { STATIC_SITE_CONTENT } from '../lib/content/fallback';
-import { loadSiteContent } from '../lib/content/loadSiteContent';
+import { clearSiteContentCache, loadSiteContent } from '../lib/content/loadSiteContent';
 import type { SiteContent } from '../lib/content/types';
 
 export function useSiteContent(): SiteContent {
@@ -8,6 +8,8 @@ export function useSiteContent(): SiteContent {
 
   useEffect(() => {
     let active = true;
+    // Always refetch on mount so Studio publishes appear after a page reload.
+    clearSiteContentCache();
     loadSiteContent().then((next) => {
       if (active) setContent(next);
     });

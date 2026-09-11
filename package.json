@@ -7,7 +7,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "seed:sanity": "tsx scripts/seed-sanity.ts",
-    "studio": "npm run dev --prefix studio-leleshwa"
+    "studio": "npm run dev --prefix studio-leleshwa",
+    "studio:deploy": "npm run deploy --prefix studio-leleshwa"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.2",
