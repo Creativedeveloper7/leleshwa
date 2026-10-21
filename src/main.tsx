@@ -7,6 +7,7 @@ import { EventSection } from './components/events/EventSection';
 import { ExperienceSection } from './components/experiences/ExperienceSection';
 import { FooterStayInTouch } from './components/footer/FooterStayInTouch';
 import { GallerySection } from './components/gallery/GallerySection';
+import { TestimonialsSection } from './components/testimonials/TestimonialsSection';
 import './index.css';
 
 const accommodationRoot = document.getElementById('accommodation-root');
@@ -59,6 +60,15 @@ if (eventRoot) {
   createRoot(eventRoot).render(
     <StrictMode>
       <EventSection />
+    </StrictMode>,
+  );
+}
+
+const testimonialsRoot = document.getElementById('testimonials-root');
+if (testimonialsRoot) {
+  createRoot(testimonialsRoot).render(
+    <StrictMode>
+      <TestimonialsSection />
     </StrictMode>,
   );
 }
