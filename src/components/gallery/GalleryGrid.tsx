@@ -1,5 +1,5 @@
-import { GALLERY_MASONRY_HEIGHTS } from '../../constants/galleryPhotos';
 import type { GalleryPhoto } from '../../types/galleryPhoto';
+import { SectionCarousel } from '../shared/SectionCarousel';
 
 interface GalleryGridProps {
   photos: GalleryPhoto[];
@@ -18,23 +18,27 @@ export function GalleryGrid({ photos, fading, onSelect }: GalleryGridProps) {
 
   return (
     <div
-      className={`gallery-grid-wrap masonry gallery-masonry${fading ? ' gallery-grid-wrap--fading' : ''}`}
-      role="list"
+      className={`gallery-grid-wrap${fading ? ' gallery-grid-wrap--fading' : ''}`}
       aria-live="polite"
     >
-      {photos.map((photo, index) => (
-        <button
-          key={photo.id}
-          type="button"
-          role="listitem"
-          className="gallery-masonry__item m-item"
-          style={{ height: GALLERY_MASONRY_HEIGHTS[index % GALLERY_MASONRY_HEIGHTS.length] }}
-          onClick={(event) => onSelect(index, event.currentTarget)}
-          aria-label={`View ${photo.alt}`}
-        >
-          <img src={photo.src} alt={photo.alt} loading="lazy" draggable={false} />
-        </button>
-      ))}
+      <SectionCarousel
+        key={`${photos.length}-${photos[0].id}`}
+        ariaLabel="Photo gallery"
+        className="section-carousel--4up gallery-carousel"
+        tone="dark"
+      >
+        {photos.map((photo, index) => (
+          <button
+            key={photo.id}
+            type="button"
+            className="gallery-masonry__item gallery-carousel__item"
+            onClick={(event) => onSelect(index, event.currentTarget)}
+            aria-label={`View ${photo.alt}`}
+          >
+            <img src={photo.src} alt={photo.alt} loading="lazy" draggable={false} />
+          </button>
+        ))}
+      </SectionCarousel>
     </div>
   );
 }

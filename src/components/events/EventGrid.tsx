@@ -1,4 +1,5 @@
 import type { CuratedEvent } from '../../types/curatedEvent';
+import { SectionCarousel } from '../shared/SectionCarousel';
 import { EventCard } from './EventCard';
 
 interface EventGridProps {
@@ -8,12 +9,10 @@ interface EventGridProps {
 
 export function EventGrid({ items, onSelect }: EventGridProps) {
   return (
-    <div className="experience-grid event-grid" role="list">
+    <SectionCarousel ariaLabel="Curated events" className="section-carousel--3up experience-grid-carousel">
       {items.map((event) => (
-        <div key={event.id} role="listitem">
-          <EventCard event={event} onSelect={onSelect} />
-        </div>
+        <EventCard key={event.id} event={event} onSelect={onSelect} />
       ))}
-    </div>
+    </SectionCarousel>
   );
 }

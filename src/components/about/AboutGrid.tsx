@@ -1,4 +1,5 @@
 import type { AboutStory } from '../../types/aboutStory';
+import { SectionCarousel } from '../shared/SectionCarousel';
 import { AboutCard } from './AboutCard';
 
 interface AboutGridProps {
@@ -8,12 +9,10 @@ interface AboutGridProps {
 
 export function AboutGrid({ items, onSelect }: AboutGridProps) {
   return (
-    <div className="about-grid" role="list">
+    <SectionCarousel ariaLabel="About Leleshwa stories" className="section-carousel--3up about-grid-carousel">
       {items.map((story) => (
-        <div key={story.id} role="listitem">
-          <AboutCard story={story} onSelect={onSelect} />
-        </div>
+        <AboutCard key={story.id} story={story} onSelect={onSelect} />
       ))}
-    </div>
+    </SectionCarousel>
   );
 }

@@ -1,4 +1,5 @@
 import type { CuratedExperience } from '../../types/curatedExperience';
+import { SectionCarousel } from '../shared/SectionCarousel';
 import { ExperienceCard } from './ExperienceCard';
 
 interface ExperienceGridProps {
@@ -8,12 +9,10 @@ interface ExperienceGridProps {
 
 export function ExperienceGrid({ items, onSelect }: ExperienceGridProps) {
   return (
-    <div className="experience-grid" role="list">
+    <SectionCarousel ariaLabel="Curated experiences" className="section-carousel--3up experience-grid-carousel">
       {items.map((experience) => (
-        <div key={experience.id} role="listitem">
-          <ExperienceCard experience={experience} onSelect={onSelect} />
-        </div>
+        <ExperienceCard key={experience.id} experience={experience} onSelect={onSelect} />
       ))}
-    </div>
+    </SectionCarousel>
   );
 }

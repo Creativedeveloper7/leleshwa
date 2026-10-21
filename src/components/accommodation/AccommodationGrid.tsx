@@ -1,4 +1,5 @@
 import type { Accommodation } from '../../types/accommodation';
+import { SectionCarousel } from '../shared/SectionCarousel';
 import { AccommodationCard } from './AccommodationCard';
 
 interface AccommodationGridProps {
@@ -8,12 +9,10 @@ interface AccommodationGridProps {
 
 export function AccommodationGrid({ items, onSelect }: AccommodationGridProps) {
   return (
-    <div className="accommodation-grid" role="list">
+    <SectionCarousel ariaLabel="Accommodation options" className="section-carousel--3up accommodation-grid-carousel">
       {items.map((accommodation) => (
-        <div key={accommodation.id} role="listitem">
-          <AccommodationCard accommodation={accommodation} onSelect={onSelect} />
-        </div>
+        <AccommodationCard key={accommodation.id} accommodation={accommodation} onSelect={onSelect} />
       ))}
-    </div>
+    </SectionCarousel>
   );
 }

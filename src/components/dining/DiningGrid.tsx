@@ -1,4 +1,5 @@
 import type { DiningVenue } from '../../types/diningVenue';
+import { SectionCarousel } from '../shared/SectionCarousel';
 import { DiningCard } from './DiningCard';
 
 interface DiningGridProps {
@@ -8,12 +9,10 @@ interface DiningGridProps {
 
 export function DiningGrid({ items, onSelect }: DiningGridProps) {
   return (
-    <div className="dining-grid" role="list">
+    <SectionCarousel ariaLabel="Dining venues" className="section-carousel--3up dining-grid-carousel">
       {items.map((venue) => (
-        <div key={venue.id} role="listitem">
-          <DiningCard venue={venue} onSelect={onSelect} />
-        </div>
+        <DiningCard key={venue.id} venue={venue} onSelect={onSelect} />
       ))}
-    </div>
+    </SectionCarousel>
   );
 }
