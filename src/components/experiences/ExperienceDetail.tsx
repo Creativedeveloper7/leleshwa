@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { Check, Clock, Users } from 'lucide-react';
 import type { CuratedExperience } from '../../types/curatedExperience';
+import { trackEvent } from '../../lib/analytics';
 import { DetailGallery } from '../shared/DetailGallery';
 import { RelatedExperiences } from './RelatedExperiences';
 
@@ -15,6 +17,9 @@ function formatPrice(amount: number): string {
 }
 
 export function ExperienceDetail({ experience, related, onBack, onSelect }: ExperienceDetailProps) {
+  useEffect(() => {
+    trackEvent('view_listing', { listing_type: 'experience', listing_id: experience.id, listing_name: experience.name });
+  }, [experience.id, experience.name]);
 
   return (
     <article className="acc-detail">

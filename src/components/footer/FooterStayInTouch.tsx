@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useSiteContent } from '../../hooks/useSiteContent';
+import { trackEvent } from '../../lib/analytics';
 import type { NewsletterSubmitState } from '../../types/newsletter';
 import { subscribeToNewsletter } from '../../utils/newsletterApi';
 
@@ -27,6 +28,7 @@ export function FooterStayInTouch() {
     const result = await subscribeToNewsletter({ email: trimmed, source: 'footer' });
 
     if (result.ok) {
+      trackEvent('sign_up', { method: 'newsletter' });
       setStatus('success');
       setFeedback("You're on the list — welcome to Leleshwa.");
       setEmail('');

@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { Check, Users } from 'lucide-react';
 import type { Accommodation } from '../../types/accommodation';
+import { trackEvent } from '../../lib/analytics';
 import { DetailGallery } from '../shared/DetailGallery';
 import { RelatedAccommodations } from './RelatedAccommodations';
 
@@ -20,6 +22,9 @@ export function AccommodationDetail({
   onBack,
   onSelect,
 }: AccommodationDetailProps) {
+  useEffect(() => {
+    trackEvent('view_listing', { listing_type: 'accommodation', listing_id: accommodation.id, listing_name: accommodation.name });
+  }, [accommodation.id, accommodation.name]);
 
   return (
     <article className="acc-detail">

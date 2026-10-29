@@ -7,6 +7,7 @@ import type {
   SubmitState,
 } from '../types/reservation';
 import { INITIAL_FORM_DATA } from '../types/reservation';
+import { trackEvent } from '../lib/analytics';
 import { createReservation } from '../lib/supabase';
 import { validateField, validateForm } from '../utils/validation';
 
@@ -45,6 +46,7 @@ export function useReservationForm(initialExperience: ExperienceType | null = nu
 
   const selectExperience = useCallback((id: ExperienceType) => {
     setExperience(id);
+    trackEvent('begin_booking', { booking_type: id });
     setErrors({});
     setTouched({});
   }, []);
@@ -75,6 +77,7 @@ export function useReservationForm(initialExperience: ExperienceType | null = nu
     setSubmitError('');
     try {
       await createReservation(experience, formData);
+      trackEvent('generate_lead', { booking_type: experience, lead_source: 'booking_form' });
       setSubmitState('success');
       return true;
     } catch (error) {

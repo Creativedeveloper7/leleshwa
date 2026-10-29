@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { Check, Clock, Users } from 'lucide-react';
 import type { CuratedEvent } from '../../types/curatedEvent';
+import { trackEvent } from '../../lib/analytics';
 import { DetailGallery } from '../shared/DetailGallery';
 import { RelatedEvents } from './RelatedEvents';
 
@@ -15,6 +17,9 @@ function formatPrice(amount: number): string {
 }
 
 export function EventDetail({ event, related, onBack, onSelect }: EventDetailProps) {
+  useEffect(() => {
+    trackEvent('view_listing', { listing_type: 'event', listing_id: event.id, listing_name: event.name });
+  }, [event.id, event.name]);
 
   return (
     <article className="acc-detail events-detail">

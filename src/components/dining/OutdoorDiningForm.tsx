@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { trackEvent } from '../../lib/analytics';
 import type {
   OutdoorDiningFormData,
   OutdoorDiningFormErrors,
@@ -65,6 +66,7 @@ export function OutdoorDiningForm({ locations, onBack }: OutdoorDiningFormProps)
     if (Object.keys(nextErrors).length > 0) return;
 
     console.log('Outdoor dining request:', form);
+    trackEvent('outdoor_dining_request', { dining_type: form.diningType });
     setSubmitted(true);
   };
 

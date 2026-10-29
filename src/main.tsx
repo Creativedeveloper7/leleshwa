@@ -8,7 +8,10 @@ import { ExperienceSection } from './components/experiences/ExperienceSection';
 import { FooterStayInTouch } from './components/footer/FooterStayInTouch';
 import { GallerySection } from './components/gallery/GallerySection';
 import { TestimonialsSection } from './components/testimonials/TestimonialsSection';
+import { initLeadTracking } from './lib/analytics';
 import './index.css';
+
+initLeadTracking();
 
 const accommodationRoot = document.getElementById('accommodation-root');
 if (accommodationRoot) {
