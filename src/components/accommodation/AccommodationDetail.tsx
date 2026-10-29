@@ -64,7 +64,7 @@ export function AccommodationDetail({
         </div>
 
         <a href="/reserve/?experience=accommodation" className="btn-reserve acc-detail-cta">
-          Reserve This Stay
+          Book This Stay
         </a>
       </div>
 

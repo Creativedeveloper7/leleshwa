@@ -15,7 +15,7 @@ export const EXPERIENCES: {
     title: 'Accommodation',
     description: 'Luxury cottages and suites overlooking the wilderness.',
     luxuryLabel: 'Luxury Stays',
-    image: '/images/main%20house.png',
+    image: '/images/main-house.webp',
     icon: BedDouble,
   },
   {
@@ -23,7 +23,7 @@ export const EXPERIENCES: {
     title: 'Dining',
     description: 'Fine dining with sunset views and curated menus.',
     luxuryLabel: 'Culinary Experience',
-    image: '/images/sunset.png',
+    image: '/images/sunset.webp',
     icon: UtensilsCrossed,
   },
   {
@@ -31,7 +31,7 @@ export const EXPERIENCES: {
     title: 'Activities',
     description: 'Nature trails, archery, and outdoor adventures.',
     luxuryLabel: 'Outdoor Adventures',
-    image: '/images/naturewalk.png',
+    image: '/images/naturewalk.webp',
     icon: Compass,
   },
   {
@@ -39,7 +39,7 @@ export const EXPERIENCES: {
     title: 'Events & Conferences',
     description: 'Elegant venues for gatherings above the landscape.',
     luxuryLabel: 'Premium Venues',
-    image: '/images/main%20house.png',
+    image: '/images/main-house.webp',
     icon: CalendarDays,
   },
 ];

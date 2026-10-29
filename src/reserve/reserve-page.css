@@ -5,7 +5,7 @@
   -webkit-font-smoothing: antialiased;
   background:
     linear-gradient(160deg, rgba(45, 27, 20, 0.88), rgba(61, 40, 28, 0.72)),
-    url('/images/sunset.png') center / cover fixed;
+    url('/images/sunset.webp') center / cover fixed;
 }
 
 .reserve-page__atmosphere {

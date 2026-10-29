@@ -18,7 +18,7 @@ a { color: inherit; }
   padding: 24px;
   background:
     linear-gradient(135deg, rgba(30, 18, 12, .88), rgba(51, 34, 24, .72)),
-    url('/images/sunset.png') center/cover;
+    url('/images/sunset.webp') center/cover;
 }
 
 .admin-login__panel {

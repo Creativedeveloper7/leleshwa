@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.leleshwa.co.ke/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://www.leleshwa.co.ke/images/sunset.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.leleshwa.co.ke/images/main-house.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.leleshwa.co.ke/images/wedding.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.leleshwa.co.ke/images/camping.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.leleshwa.co.ke/images/restaurant.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.leleshwa.co.ke/reserve/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

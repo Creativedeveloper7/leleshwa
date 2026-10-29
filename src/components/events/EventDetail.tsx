@@ -63,7 +63,7 @@ export function EventDetail({ event, related, onBack, onSelect }: EventDetailPro
         </div>
 
         <a href="/reserve/?experience=events" className="btn-reserve acc-detail-cta">
-          Enquire About This Event
+          Get an Event Quote
         </a>
       </div>
 

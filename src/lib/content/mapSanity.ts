@@ -8,7 +8,7 @@ import type { SocialLink } from '../../constants/siteSettings';
 import type { SiteContent } from './types';
 import { STATIC_SITE_CONTENT } from './fallback';
 
-const FALLBACK_HERO = '/images/sunset.png';
+const FALLBACK_HERO = '/images/sunset.webp';
 
 function asString(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
@@ -22,6 +22,33 @@ function asStringArray(value: unknown): string[] {
   return Array.isArray(value)
     ? value.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
     : [];
+}
+
+/**
+ * Serve the lightest image for the page:
+ * - Sanity CDN assets get WebP/AVIF auto-format and a sensible max width.
+ * - Legacy seeded paths like "/images/main%20house.png" point at the WebP copies.
+ */
+function optimizeImage(url: string): string {
+  if (!url) return url;
+  if (url.startsWith('https://cdn.sanity.io/images/')) {
+    if (url.includes('?')) return url;
+    return `${url}?auto=format&fit=max&w=1600&q=75`;
+  }
+  const legacy = url.match(/^\/images\/(.+)\.(png|jpe?g)$/i);
+  if (legacy && legacy[1] !== 'og-image') {
+    const name = decodeURIComponent(legacy[1]).replace(/\s+/g, '-');
+    return `/images/${name}.webp`;
+  }
+  return url;
+}
+
+function asImage(value: unknown): string {
+  return optimizeImage(asString(value));
+}
+
+function asImageArray(value: unknown): string[] {
+  return asStringArray(value).map(optimizeImage);
 }
 
 function normalizeId(value: unknown): string {
@@ -43,8 +70,8 @@ function mapAccommodation(doc: Record<string, unknown>): Accommodation | null {
     id,
     name,
     tagline: asString(doc.tagline),
-    heroImage: asString(doc.heroImage) || FALLBACK_HERO,
-    gallery: asStringArray(doc.gallery),
+    heroImage: asImage(doc.heroImage) || FALLBACK_HERO,
+    gallery: asImageArray(doc.gallery),
     description: asString(doc.description),
     amenities: asStringArray(doc.amenities),
     maxGuests: asNumber(doc.maxGuests, 2),
@@ -61,8 +88,8 @@ function mapExperience(doc: Record<string, unknown>): CuratedExperience | null {
     id,
     name,
     tagline: asString(doc.tagline),
-    heroImage: asString(doc.heroImage) || FALLBACK_HERO,
-    gallery: asStringArray(doc.gallery),
+    heroImage: asImage(doc.heroImage) || FALLBACK_HERO,
+    gallery: asImageArray(doc.gallery),
     description: asString(doc.description),
     highlights: asStringArray(doc.highlights),
     duration: asString(doc.duration),
@@ -91,9 +118,9 @@ function mapDining(doc: Record<string, unknown>): DiningVenue | null {
     id,
     name,
     tagline: asString(doc.tagline),
-    heroImage: asString(doc.heroImage) || FALLBACK_HERO,
+    heroImage: asImage(doc.heroImage) || FALLBACK_HERO,
     viewType,
-    ...(viewType === 'menu' ? { menuImages: asStringArray(doc.menuImages) } : {}),
+    ...(viewType === 'menu' ? { menuImages: asImageArray(doc.menuImages) } : {}),
   };
 }
 
@@ -109,7 +136,7 @@ const GALLERY_CATEGORIES = new Set<GalleryCategory>([
 
 function mapGallery(doc: Record<string, unknown>): GalleryPhoto | null {
   const id = normalizeId(doc.id);
-  const src = asString(doc.src);
+  const src = asImage(doc.src);
   const alt = asString(doc.alt);
   const category = asString(doc.category) as GalleryCategory;
   if (!id || !src || !alt || !GALLERY_CATEGORIES.has(category)) return null;
@@ -125,8 +152,8 @@ function mapAbout(doc: Record<string, unknown>): AboutStory | null {
     id,
     name,
     tagline: asString(doc.tagline),
-    heroImage: asString(doc.heroImage) || FALLBACK_HERO,
-    gallery: asStringArray(doc.gallery),
+    heroImage: asImage(doc.heroImage) || FALLBACK_HERO,
+    gallery: asImageArray(doc.gallery),
     description: asString(doc.description),
     highlights: asStringArray(doc.highlights),
   };

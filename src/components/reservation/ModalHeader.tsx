@@ -30,7 +30,7 @@ export function ModalHeader({ titleId, step }: ModalHeaderProps) {
 
       <div className="reserve-header__brand">
         <img
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt="Leleshwa Getaway"
           className="reserve-header__logo"
         />

@@ -17,7 +17,7 @@ export function SuccessState({ onReturnHome, onMakeAnother }: SuccessStateProps)
     >
       <div
         className="reserve-success__bg"
-        style={{ backgroundImage: "url('/images/sunset.png')" }}
+        style={{ backgroundImage: "url('/images/sunset.webp')" }}
         aria-hidden="true"
       />
       <div className="reserve-success__overlay" aria-hidden="true" />

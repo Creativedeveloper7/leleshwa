@@ -64,7 +64,7 @@ export function ReservationPage() {
   } = useReservationForm(initialExperience);
 
   useEffect(() => {
-    document.title = 'Reserve — Leleshwa Getaway';
+    document.title = 'Book Your Getaway, Event or Table | Leleshwa Getaway Near Nairobi';
   }, []);
 
   useEffect(() => {
@@ -109,7 +109,7 @@ export function ReservationPage() {
             Back
           </button>
           <a href="/" className="reserve-page__brand">
-            <img src="/images/logo.png" alt="Leleshwa Getaway" />
+            <img src="/images/logo.webp" alt="Leleshwa Getaway" />
           </a>
           <span className="reserve-page__crumb" aria-current="page">
             Reserve
