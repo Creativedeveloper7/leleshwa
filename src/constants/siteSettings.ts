@@ -4,12 +4,12 @@ export interface SocialLink {
   href: string;
 }
 
-/** Placeholder URLs — replace from admin dashboard when available. */
+/** Instagram is confirmed; Facebook and Pinterest are still placeholders. */
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     id: 'instagram',
     label: 'Instagram',
-    href: 'https://www.instagram.com/leleshwa',
+    href: 'https://www.instagram.com/leleshwagetaway/',
   },
   {
     id: 'facebook',

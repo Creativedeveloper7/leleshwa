@@ -193,6 +193,17 @@ function withSiteCopy<T extends { id: string }>(items: T[], copy: T[], fields: (
   });
 }
 
+/** The confirmed Instagram account in src/constants always wins over the CMS link. */
+function withOfficialInstagram(links: SocialLink[]): SocialLink[] {
+  const official = STATIC_SITE_CONTENT.socialLinks.find((link) => link.id === 'instagram');
+  if (!official) return links;
+  const isInstagram = (link: SocialLink) =>
+    link.id.toLowerCase() === 'instagram' || /instagram\.com/i.test(link.href);
+  return links.some(isInstagram)
+    ? links.map((link) => (isInstagram(link) ? { ...link, href: official.href } : link))
+    : [official, ...links];
+}
+
 export function mapSanityPayload(payload: Record<string, unknown>): SiteContent {
   const settings =
     payload.settings && typeof payload.settings === 'object'
@@ -280,7 +291,7 @@ export function mapSanityPayload(payload: Record<string, unknown>): SiteContent 
       about.length > 0
         ? withSiteCopy(about, copy.about, ['tagline', 'description', 'highlights'])
         : copy.about,
-    socialLinks: socialLinks.length > 0 ? socialLinks : copy.socialLinks,
+    socialLinks: socialLinks.length > 0 ? withOfficialInstagram(socialLinks) : copy.socialLinks,
     outdoorDiningLocations:
       outdoorDiningLocations.length > 0
         ? outdoorDiningLocations
