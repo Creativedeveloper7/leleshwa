@@ -4,7 +4,7 @@ export interface SocialLink {
   href: string;
 }
 
-/** Instagram is confirmed; Facebook and Pinterest are still placeholders. */
+/** Instagram and Facebook are confirmed; Pinterest is still a placeholder. */
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     id: 'instagram',
@@ -14,7 +14,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     id: 'facebook',
     label: 'Facebook',
-    href: 'https://www.facebook.com/leleshwa',
+    href: 'https://www.facebook.com/share/1MZAGL5WeR/',
   },
   {
     id: 'pinterest',
