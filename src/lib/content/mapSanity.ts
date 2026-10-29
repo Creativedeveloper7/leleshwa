@@ -174,6 +174,25 @@ function mapSocialLinks(value: unknown): SocialLink[] {
     .filter((link): link is SocialLink => link !== null);
 }
 
+/**
+ * Website copy (in src/constants) is written for search and always wins over
+ * the CMS text for items that share an id. Sanity still controls images,
+ * prices, capacity and any new items that only exist in the CMS.
+ */
+function withSiteCopy<T extends { id: string }>(items: T[], copy: T[], fields: (keyof T)[]): T[] {
+  const copyById = new Map(copy.map((item) => [item.id, item]));
+  return items.map((item) => {
+    const source = copyById.get(item.id);
+    if (!source) return item;
+    const merged = { ...item };
+    for (const field of fields) {
+      const value = source[field];
+      if (Array.isArray(value) ? value.length > 0 : Boolean(value)) merged[field] = value;
+    }
+    return merged;
+  });
+}
+
 export function mapSanityPayload(payload: Record<string, unknown>): SiteContent {
   const settings =
     payload.settings && typeof payload.settings === 'object'
@@ -240,18 +259,32 @@ export function mapSanityPayload(payload: Record<string, unknown>): SiteContent 
     });
   }
 
+  const copy = STATIC_SITE_CONTENT;
+
   return {
-    accommodations: accommodations.length > 0 ? accommodations : STATIC_SITE_CONTENT.accommodations,
-    experiences: experiences.length > 0 ? experiences : STATIC_SITE_CONTENT.experiences,
-    events: events.length > 0 ? events : STATIC_SITE_CONTENT.events,
-    dining: dining.length > 0 ? dining : STATIC_SITE_CONTENT.dining,
-    gallery: gallery.length > 0 ? gallery : STATIC_SITE_CONTENT.gallery,
-    about: about.length > 0 ? about : STATIC_SITE_CONTENT.about,
-    socialLinks: socialLinks.length > 0 ? socialLinks : STATIC_SITE_CONTENT.socialLinks,
+    accommodations:
+      accommodations.length > 0
+        ? withSiteCopy(accommodations, copy.accommodations, ['tagline', 'description', 'amenities'])
+        : copy.accommodations,
+    experiences:
+      experiences.length > 0
+        ? withSiteCopy(experiences, copy.experiences, ['tagline', 'description', 'highlights'])
+        : copy.experiences,
+    events:
+      events.length > 0
+        ? withSiteCopy(events, copy.events, ['tagline', 'description', 'highlights'])
+        : copy.events,
+    dining: dining.length > 0 ? withSiteCopy(dining, copy.dining, ['tagline']) : copy.dining,
+    gallery: gallery.length > 0 ? withSiteCopy(gallery, copy.gallery, ['alt']) : copy.gallery,
+    about:
+      about.length > 0
+        ? withSiteCopy(about, copy.about, ['tagline', 'description', 'highlights'])
+        : copy.about,
+    socialLinks: socialLinks.length > 0 ? socialLinks : copy.socialLinks,
     outdoorDiningLocations:
       outdoorDiningLocations.length > 0
         ? outdoorDiningLocations
-        : STATIC_SITE_CONTENT.outdoorDiningLocations,
+        : copy.outdoorDiningLocations,
     source: hasCmsContent ? 'sanity' : 'static',
   };
 }

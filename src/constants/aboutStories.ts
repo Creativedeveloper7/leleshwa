@@ -13,14 +13,14 @@ export const ABOUT_STORIES: AboutStory[] = [
       '/images/rest.webp',
     ],
     description:
-      'Overlooking Silole Sanctuary and Nairobi National Park, Leleshwa Getaway is a luxury nature retreat and event venue where comfort meets the beauty of the wild. Founded in 2010 and named after the iconic Leleshwa tree, our three-acre sanctuary offers a unique blend of countryside charm and refined hospitality — only 25 kilometres from Nairobi\'s bustling city centre. From exquisite dining and breathtaking sunsets to curated family experiences and elegant event spaces, every moment is crafted to reconnect you with nature without leaving comfort behind.',
+      'Perched on the edge of a gorge overlooking Nairobi National Park and Silole Sanctuary, Leleshwa Getaway is a cliffside nature retreat and event venue where comfort meets the beauty of the wild. Founded in 2010 and named after the iconic Leleshwa tree, our three-acre sanctuary sits in the Oloosirkon / Tuala area of Ongata Rongai, Kajiado County — past Africa Nazarene University and the Maasai Lodge Hotel, on Glass Lane right next to Kitengela Glass, only 25 kilometres from Nairobi CBD. From exquisite dining and breathtaking sunsets to curated family experiences and elegant event spaces, every moment is crafted to reconnect you with nature without leaving comfort behind.',
     highlights: [
       'Founded in 2010',
       'Named after the Leleshwa tree',
       '3-acre sanctuary',
-      '25km from Nairobi',
-      'Silole Sanctuary & Nairobi National Park',
-      'Countryside charm meets refined hospitality',
+      '25km from Nairobi CBD',
+      'Next to Kitengela Glass, Ongata Rongai',
+      'Cliffside views of Nairobi National Park',
     ],
   },
   {
